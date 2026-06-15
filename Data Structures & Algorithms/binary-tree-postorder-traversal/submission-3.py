@@ -1,0 +1,63 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        stack = [(root, False)]
+        res = []
+        while stack:
+            curr, v = stack.pop()
+            if not curr:
+                continue
+            if v:
+                res.append(curr.val)
+            else:
+                stack.append((curr, True))
+                stack.append((curr.right, False))
+                stack.append((curr.left, False))
+        return res
+        # stack = [root]
+        # visited = [False]
+        # res = []
+        # while stack:
+        #     curr, v = stack.pop(), visited.pop()
+        #     if curr:
+        #         if v:
+        #             res.append(curr.val)
+        #         else:
+        #             stack.append(curr)
+        #             visited.append(True)
+        #             stack.append(curr.right)
+        #             visited.append(False)
+        #             stack.append(curr.left)
+        #             visited.append(False)
+        # return res
+
+        # if not root:
+        #     return []
+        # res = []
+        # stack1 = [root]
+        # stack2 = []
+        # while stack1:
+        #     curr = stack1.pop()
+        #     stack2.append(curr)
+
+        #     if(curr.left):
+        #         stack1.append(curr.left)
+        #     if(curr.right):
+        #         stack1.append(curr.right)
+        # while stack2:
+        #     res.append(stack2.pop().val)
+        # return res
+        # res = []
+        # def postorder(root):
+        #     if not root:
+        #         return
+        #     postorder(root.left)
+        #     postorder(root.right)
+        #     res.append(root.val)
+        # postorder(root)
+        # return res
